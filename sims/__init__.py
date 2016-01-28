@@ -2,14 +2,15 @@ import importlib
 import inspect
 import os
 
-__version__ = '0.11.0'
+__version__ = '0.12.0'
 __config_instance = None
+__inital_load = None
 SETTINGS_PATH_VAR = 'APP_SETTING_MODULE'
 DEFAULT_ENV = 'local'
 DEFAULT_SETTINGS_MODULE = 'settings'
 
 
-def get(key=None, default=None):
+def _init():
     global __config_instance
 
     def resolve_config_path():
@@ -29,6 +30,11 @@ def get(key=None, default=None):
         except:
             __config_instance = {}
 
+
+def get(key=None, default=None):
+    global __config_instance
+
+    _init()
     return __config_instance.get(key, default)
 
 
@@ -37,7 +43,7 @@ def merge(settings, override=False):
     global __config_instance
 
     if __config_instance is None:
-        __config_instance = {}
+        _init()
 
     for key, value in new_settings.iteritems():
         if key not in __config_instance or override:
@@ -56,6 +62,7 @@ def load_settings(settings_module):
                 result[setting] = setting_value
 
     return result
+
 
 def reset():
     if __config_instance is not None:
