@@ -51,7 +51,6 @@ coverage.xml
 
 # Django stuff:
 *.log
-
 # Sphinx documentation
 docs/_build/
 
@@ -60,3 +59,12 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+.idea/.name
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/sims.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.DS_Store
+sims/.DS_Store
